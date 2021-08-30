@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:x12="http://www.mulesoft.org/schema/mule/x12" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/x12 http://www.mulesoft.org/schema/mule/x12/current/mule-x12.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="fb61e625-bdd6-49b6-ae61-8da668132adb" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<x12:config name="X12_EDI_Config" doc:name="X12 EDI Config" doc:id="ee18462a-5d7e-4a9d-8a7e-3e9e52be4c0f" interchangeIdQualifierSelf="ZZ" interchangeIdSelf="Mule" groupIdSelf="DA" interchangeIdQualifierPartner="ZZ" interchangeIdPartner="DP" groupIdPartner="DP" truncateExceedingMaxLength="true">
+		<x12:connection />
+		<x12:schemas >
+			<x12:schema value="/837.esl" />
+		</x12:schemas>
+	</x12:config>
+	<flow name="usecase-6Flow" doc:id="b32812da-fa73-4801-b10b-11a1a1788008" >
+		<http:listener doc:name="Listener" doc:id="e86aed94-9eac-498c-9076-bc631fd7f71d" config-ref="HTTP_Listener_config" path="/edi"/>
+		<ee:transform doc:name="Transform Message" doc:id="ae4a7547-e8f7-4673-bea1-c06fce694745" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/dw
+---
+{
+	"TransactionSets": {
+		"v004050": {
+			"837": [{
+				Heading: {
+					"0100_BHT": {
+						BHT02: payload.AccountNumber,
+						BHT01: payload.BillingState
+					}
+				},
+				Detail: {
+					"2000_Loop": [{
+						"0010_HL": {
+							HL03: payload.BillingCity,
+							HL01: payload.BillingCounty
+						}
+					}]
+				}
+			}]
+		}
+	}
+} ]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="f8c1b303-8560-483b-9689-c5d2c8449232" message="#[payload]"/>
+		<x12:write doc:name="Write" doc:id="3c24bf5d-9a22-4d96-9fdb-512f43c9441f" config-ref="X12_EDI_Config" outputEdiMimeType="APPLICATION_EDIX12"/>
+		<logger level="INFO" doc:name="Logger" doc:id="deb966df-d68e-4700-af48-fca5b53648fa" message="#[payload]"/>
+		<ee:transform doc:name="Transform Message" doc:id="934d5230-5cee-45ce-8eaf-93edc888d527" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload as String]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="36993ff4-90c4-4d6e-ad74-5988274c9eda" />
+	</flow>
+</mule>

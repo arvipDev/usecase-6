@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="data" format="json">
+      <types:shape format="weave" example="examples/data.json"><![CDATA[%dw 2.0
+
+type data = {|
+  BillingCounty: String, 
+  BillingCity: String, 
+  BillingState: String, 
+  AccountNumber: String
+|} {"example": "{\\\"BillingCounty\\\":\\\"AK\\\",\\\"BillingCity\\\":\\\"KA\\\",\\\"BillingState\\\":\\\"VAND\\\",\\\"AccountNumber\\\":\\\"32\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#e86aed94-9eac-498c-9076-bc631fd7f71d">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="data"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

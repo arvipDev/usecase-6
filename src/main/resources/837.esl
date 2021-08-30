@@ -1,0 +1,174 @@
+form: X12
+version: '004050'
+imports: [ '/x12/004050/basedefs.esl' ]
+id: '837'
+name: 'Health Care Claim'
+class: 'HC'
+heading: 
+- { idRef: 'ST', position: '0050', usage: M }
+- { idRef: 'BHT', position: '0100', usage: M }
+- { idRef: 'REF', position: '0150', usage: O, count: 3 }
+- groupId: '1000_Loop'
+  count: 10
+  usage: O
+  items: 
+  - { idRef: 'NM1', position: '0200', usage: O }
+  - { idRef: 'N2', position: '0250', usage: O, count: 2 }
+  - { idRef: 'N3', position: '0300', usage: O, count: 2 }
+  - { idRef: 'N4', position: '0350', usage: O }
+  - { idRef: 'REF', position: '0400', usage: O, count: 2 }
+  - { idRef: 'PER', position: '0450', usage: O, count: 2 }
+detail: 
+- groupId: '2000_Loop'
+  count: '>1'
+  usage: M
+  items: 
+  - { idRef: 'HL', position: '0010', usage: M }
+  - { idRef: 'PRV', position: '0030', usage: O }
+  - { idRef: 'SBR', position: '0050', usage: O }
+  - { idRef: 'PAT', position: '0070', usage: O }
+  - { idRef: 'DTP', position: '0090', usage: O, count: 5 }
+  - { idRef: 'CUR', position: '0100', usage: O }
+  - groupId: '2010_Loop'
+    count: 10
+    usage: O
+    items: 
+    - { idRef: 'NM1', position: '0150', usage: O }
+    - { idRef: 'N2', position: '0200', usage: O, count: 2 }
+    - { idRef: 'N3', position: '0250', usage: O, count: 2 }
+    - { idRef: 'N4', position: '0300', usage: O }
+    - { idRef: 'DMG', position: '0320', usage: O }
+    - { idRef: 'REF', position: '0350', usage: O, count: 20 }
+    - { idRef: 'PER', position: '0400', usage: O, count: 2 }
+  - groupId: '2300_Loop'
+    count: 100
+    usage: O
+    items: 
+    - { idRef: 'CLM', position: '1300', usage: O }
+    - { idRef: 'DTP', position: '1350', usage: O, count: 150 }
+    - { idRef: 'CL1', position: '1400', usage: O }
+    - { idRef: 'DN1', position: '1450', usage: O }
+    - { idRef: 'DN2', position: '1500', usage: O, count: 35 }
+    - { idRef: 'PWK', position: '1550', usage: O, count: 10 }
+    - { idRef: 'CN1', position: '1600', usage: O }
+    - { idRef: 'DSB', position: '1650', usage: O }
+    - { idRef: 'UR', position: '1700', usage: O }
+    - { idRef: 'AMT', position: '1750', usage: O, count: 40 }
+    - { idRef: 'REF', position: '1800', usage: O, count: 30 }
+    - { idRef: 'K3', position: '1850', usage: O, count: 10 }
+    - { idRef: 'NTE', position: '1900', usage: O, count: 20 }
+    - { idRef: 'CR1', position: '1950', usage: O }
+    - { idRef: 'CR2', position: '2000', usage: O }
+    - { idRef: 'CR3', position: '2050', usage: O }
+    - { idRef: 'CR4', position: '2100', usage: O, count: 3 }
+    - { idRef: 'CR5', position: '2150', usage: O }
+    - { idRef: 'CR6', position: '2160', usage: O }
+    - { idRef: 'CR8', position: '2190', usage: O, count: 9 }
+    - { idRef: 'CRC', position: '2200', usage: O, count: 100 }
+    - { idRef: 'HI', position: '2310', usage: O, count: 25 }
+    - { idRef: 'QTY', position: '2400', usage: O, count: 10 }
+    - { idRef: 'HCP', position: '2410', usage: O }
+    - groupId: '2305_Loop'
+      count: 6
+      usage: O
+      items: 
+      - { idRef: 'CR7', position: '2420', usage: O }
+      - { idRef: 'HSD', position: '2430', usage: O, count: 12 }
+    - groupId: '2310_Loop'
+      count: 9
+      usage: O
+      items: 
+      - { idRef: 'NM1', position: '2500', usage: O }
+      - { idRef: 'PRV', position: '2550', usage: O }
+      - { idRef: 'N2', position: '2600', usage: O, count: 2 }
+      - { idRef: 'N3', position: '2650', usage: O, count: 2 }
+      - { idRef: 'N4', position: '2700', usage: O }
+      - { idRef: 'REF', position: '2710', usage: O, count: 20 }
+      - { idRef: 'PER', position: '2750', usage: O, count: 2 }
+    - groupId: '2320_Loop'
+      count: 10
+      usage: O
+      items: 
+      - { idRef: 'SBR', position: '2900', usage: O }
+      - { idRef: 'CAS', position: '2950', usage: O, count: 99 }
+      - { idRef: 'AMT', position: '3000', usage: O, count: 15 }
+      - { idRef: 'DMG', position: '3050', usage: O }
+      - { idRef: 'OI', position: '3100', usage: O }
+      - { idRef: 'MIA', position: '3150', usage: O }
+      - { idRef: 'MOA', position: '3200', usage: O }
+      - groupId: '2330_Loop'
+        count: 10
+        usage: O
+        items: 
+        - { idRef: 'NM1', position: '3250', usage: O }
+        - { idRef: 'N2', position: '3300', usage: O, count: 2 }
+        - { idRef: 'N3', position: '3320', usage: O, count: 2 }
+        - { idRef: 'N4', position: '3400', usage: O }
+        - { idRef: 'PER', position: '3450', usage: O, count: 2 }
+        - { idRef: 'DTP', position: '3500', usage: O, count: 9 }
+        - { idRef: 'REF', position: '3550', usage: O, count: '>1' }
+    - groupId: '2400_Loop'
+      count: '>1'
+      usage: O
+      items: 
+      - { idRef: 'LX', position: '3650', usage: O }
+      - { idRef: 'SV1', position: '3700', usage: O }
+      - { idRef: 'SV2', position: '3750', usage: O }
+      - { idRef: 'SV3', position: '3800', usage: O }
+      - { idRef: 'TOO', position: '3820', usage: O, count: 32 }
+      - { idRef: 'SV4', position: '3850', usage: O }
+      - { idRef: 'SV5', position: '4000', usage: O }
+      - { idRef: 'SV6', position: '4050', usage: O }
+      - { idRef: 'SV7', position: '4100', usage: O }
+      - { idRef: 'HI', position: '4150', usage: O, count: 25 }
+      - { idRef: 'PWK', position: '4200', usage: O, count: 10 }
+      - { idRef: 'CR1', position: '4250', usage: O }
+      - { idRef: 'CR2', position: '4300', usage: O, count: 5 }
+      - { idRef: 'CR3', position: '4350', usage: O }
+      - { idRef: 'CR4', position: '4400', usage: O, count: 3 }
+      - { idRef: 'CR5', position: '4450', usage: O }
+      - { idRef: 'CRC', position: '4500', usage: O, count: 3 }
+      - { idRef: 'DTP', position: '4550', usage: O, count: 15 }
+      - { idRef: 'QTY', position: '4600', usage: O, count: 5 }
+      - { idRef: 'MEA', position: '4620', usage: O, count: 20 }
+      - { idRef: 'CN1', position: '4650', usage: O }
+      - { idRef: 'REF', position: '4700', usage: O, count: 30 }
+      - { idRef: 'AMT', position: '4750', usage: O, count: 15 }
+      - { idRef: 'K3', position: '4800', usage: O, count: 10 }
+      - { idRef: 'NTE', position: '4850', usage: O, count: 10 }
+      - { idRef: 'PS1', position: '4880', usage: O }
+      - { idRef: 'IMM', position: '4900', usage: O, count: '>1' }
+      - { idRef: 'HSD', position: '4910', usage: O }
+      - { idRef: 'HCP', position: '4920', usage: O }
+      - groupId: '2410_Loop'
+        count: '>1'
+        usage: O
+        items: 
+        - { idRef: 'LIN', position: '4930', usage: O }
+        - { idRef: 'CTP', position: '4940', usage: O }
+        - { idRef: 'REF', position: '4950', usage: O }
+      - groupId: '2420_Loop'
+        count: 10
+        usage: O
+        items: 
+        - { idRef: 'NM1', position: '5000', usage: O }
+        - { idRef: 'PRV', position: '5050', usage: O }
+        - { idRef: 'N2', position: '5100', usage: O, count: 2 }
+        - { idRef: 'N3', position: '5140', usage: O, count: 2 }
+        - { idRef: 'N4', position: '5200', usage: O }
+        - { idRef: 'REF', position: '5250', usage: O, count: 20 }
+        - { idRef: 'PER', position: '5300', usage: O, count: 2 }
+      - groupId: '2430_Loop'
+        count: '>1'
+        usage: O
+        items: 
+        - { idRef: 'SVD', position: '5400', usage: O }
+        - { idRef: 'CAS', position: '5450', usage: O, count: 99 }
+        - { idRef: 'DTP', position: '5500', usage: O, count: 9 }
+      - groupId: '2440_Loop'
+        count: '>1'
+        usage: O
+        items: 
+        - { idRef: 'LQ', position: '5510', usage: O }
+        - { idRef: 'FRM', position: '5520', usage: M, count: 99 }
+- { idRef: 'SE', position: '5550', usage: M }
